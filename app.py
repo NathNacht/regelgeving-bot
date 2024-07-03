@@ -1,14 +1,16 @@
 import os
-from pprint import pprint
 
 import streamlit as st
 from openai import OpenAI
 import time
 
-print('start')
+from open_ai_vector_store_loader import get_vector_store_id_by_name
 
 if 'client' not in st.session_state:
     st.session_state.client = OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
+
+if 'vector_store_id' not in st.session_state:
+    st.session_state.vector_store_id = get_vector_store_id_by_name("ArcelorMittal")
 
 if "assistant" not in st.session_state:
     st.session_state.assistant = st.session_state.client.beta.assistants.create(
@@ -20,7 +22,7 @@ if "assistant" not in st.session_state:
                      "You are currently standing at a job fair in belgium.",
         name="Documents Assistant",
         tools=[{"type": "file_search"}],
-        tool_resources={"file_search": {"vector_store_ids": ["vs_MY0e5cfw3inglaYU38wp45aR"]}},  #, "vs_w6Du7wOUPGBXbhXk3Fk3FJL0"]}},
+        tool_resources={"file_search": {"vector_store_ids": [st.session_state.vector_store_id]}},
         model="gpt-3.5-turbo",
     )
 
@@ -96,6 +98,7 @@ if not st.session_state.messages:
         st.write("🌟 I'm Olga, your helpful AI assistant from Arcelormittal, here to guide you through the world of "
                  "of ArcelorMittal and guide you trough opportunities at our company! 🚀")
     print("finished request")
+
     # breakpoint()
 
 # print('sessstae')
