@@ -3,31 +3,17 @@ import os
 import streamlit as st
 from openai import OpenAI
 import time
+from config import Config
 
-from open_ai_vector_store_loader import get_vector_store_id_by_name
+from assitant import Assistant
 
 if 'client' not in st.session_state:
     st.session_state.client = OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
 
-if 'vector_store_id' not in st.session_state:
-    st.session_state.vector_store_id = get_vector_store_id_by_name("ArcelorMittal")
-
 if "assistant" not in st.session_state:
-    st.session_state.assistant = st.session_state.client.beta.assistants.create(
-        instructions="You are Olga you are a very kind and friendly AI assistant. You are an employee at the "
-                     "company Arcelormittal and your are a recruiter for the company. Your goal is to promote a "
-                     "good image for the company and answer any questions that the user may have about the company."
-                     "As a second role your job is also to ask about peoples skills, experience or interest, when you" 
-                     "gathered some information propose some open vacancies that you can find in uploaded documents."
-                     "You are currently standing at a job fair in belgium.",
-        name="Documents Assistant",
-        tools=[{"type": "file_search"}],
-        tool_resources={"file_search": {"vector_store_ids": [st.session_state.vector_store_id]}},
-        model="gpt-3.5-turbo",
-    )
+    assistant = Assistant()
+    st.session_state.assistant = assistant.get_assistant()
 
-
-# ===============================
 
 def run_assistant(
         message_body):  # Create a message, run the assistant on it, monitor it for completion, and display the output
@@ -80,24 +66,62 @@ if "messages" not in st.session_state.keys():
 
 user_prompt = st.chat_input()
 
+# add history to chat
+if st.session_state.messages:
+    for message in reversed(st.session_state.messages.data):
+        with st.chat_message(message.role):
+            st.write(message.content[0].text.value)
+
 if user_prompt is not None:
     # st.session_state.messages.append({"role": "user", "content": user_prompt})
-    if st.session_state.messages:
-        for message in reversed(st.session_state.messages.data):
-            with st.chat_message(message.role):
-                st.write(message.content[0].text.value)
+    # # add history to chat
+    # if st.session_state.messages:
+    #     for message in reversed(st.session_state.messages.data):
+    #         with st.chat_message(message.role):
+    #             st.write(message.content[0].text.value)
+    # add user prompt to chat
     with st.chat_message("user"):
         st.write(user_prompt)
     st.session_state.messages = run_assistant(user_prompt)
+    # add response to chat
     if st.session_state.messages:
         with st.chat_message(st.session_state.messages.data[0].role):
             st.write(st.session_state.messages.data[0].content[0].text.value)
 
 if not st.session_state.messages:
     with st.chat_message("assistant"):
-        st.write("🌟 I'm Olga, your helpful AI assistant from Arcelormittal, here to guide you through the world of "
-                 "of ArcelorMittal and guide you trough opportunities at our company! 🚀")
+        st.write("🌟 I'm Olga, your helpful AI assistant from Arcelormittal. Do you have questions about the company or jobs? Shoot! 🚀")
     print("finished request")
+
+options = ["What do we make?", "What are our value?", "What we do for Climate Change?"]
+columns = list(zip(options, st.columns(3)))
+for option, col in columns:
+    with col:
+        if st.button(option, use_container_width=True):
+            print(option)
+if st.button("Go to Job Training!", type="primary"):
+    response = st.session_state.client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": Config.CLASSIFY_PROMPT
+                    }
+                ]
+            },
+        ],
+        temperature=0,
+        max_tokens=25,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0,
+        response_format={"type": "json_object"},
+    )
+    response_message = response.choices[0].message.content
+    print(response_message)
 
     # breakpoint()
 
