@@ -93,12 +93,12 @@ if not st.session_state.messages:
         st.write("🌟 I'm Olga, your helpful AI assistant from Arcelormittal. Do you have questions about the company or jobs? Shoot! 🚀")
     print("finished request")
 
-options = ["What do we make?", "What are our value?", "What we do for Climate Change?"]
-columns = list(zip(options, st.columns(3)))
-for option, col in columns:
-    with col:
-        if st.button(option, use_container_width=True):
-            print(option)
+# options = ["What do we make?", "What are our value?", "What we do for Climate Change?"]
+# columns = list(zip(options, st.columns(3)))
+# for option, col in columns:
+#     with col:
+#         if st.button(option, use_container_width=True):
+#             print(option)
 if st.button("Go to Job Training!", type="primary"):
     response = st.session_state.client.chat.completions.create(
         model="gpt-4o",
