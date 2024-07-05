@@ -1,12 +1,14 @@
 ```mermaid
 graph TD;
-    Main_Website-->Scrapy_SitemapSpider;
-    Job_Website-->Scrapy_Spider;
-    Scrapy_SitemapSpider-->Website_Folder;
-    Scrapy_Spider-->Job_Folder;
-    Website_Folder-->Vector_Store_Loader;
-    Job_Folder-->Vector_Store_Loader;
-    Vector_Store_Loader-->OpenAi_VectorStore;
-    OpenAi_VectorStore-->OpenAi_Assistant;
-    OpenAi_Assistant-->Streamlit;
+    A[Main Website] --> B[Scrapy Sitemap Spider];
+    A2[Job Website] --> B2[Scrapy Spider];
+    B --> C[Website Folder];
+    B2 --> C2[Job Folder];
+    C --> D[Vector Store Loader];
+    C2 --> D;
+    D --> E[OpenAI VectorStore];
+    E --> F[Streamlit App];
+    F --> G[OpenAI Assistant];
+    G -.-> E;
+    G --> H[Chat!];
 ```
