@@ -99,29 +99,29 @@ if not st.session_state.messages:
 #     with col:
 #         if st.button(option, use_container_width=True):
 #             print(option)
-if st.button("Go to Job Training!", type="primary"):
-    response = st.session_state.client.chat.completions.create(
-        model="gpt-4o",
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "text",
-                        "text": Config.CLASSIFY_PROMPT
-                    }
-                ]
-            },
-        ],
-        temperature=0,
-        max_tokens=25,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0,
-        response_format={"type": "json_object"},
-    )
-    response_message = response.choices[0].message.content
-    print(response_message)
+# if st.button("Go to Job Training!", type="primary"):
+#     response = st.session_state.client.chat.completions.create(
+#         model="gpt-4o",
+#         messages=[
+#             {
+#                 "role": "user",
+#                 "content": [
+#                     {
+#                         "type": "text",
+#                         "text": Config.CLASSIFY_PROMPT
+#                     }
+#                 ]
+#             },
+#         ],
+#         temperature=0,
+#         max_tokens=25,
+#         top_p=1,
+#         frequency_penalty=0,
+#         presence_penalty=0,
+#         response_format={"type": "json_object"},
+#     )
+#     response_message = response.choices[0].message.content
+#     print(response_message)
 
     # breakpoint()
 

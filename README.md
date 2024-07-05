@@ -35,3 +35,21 @@ graph TD;
     ├── scrapy.cfg
     └── utils.py  # scrapy utils
 ```
+# Setup
+Set `OPENAI_API_KEY=sk-...` to your Openai key as an environment variable.
+```bash
+# Install requirements
+pip install -r requirements.txt
+
+# Scrape data
+cd scraper
+scrapy crawl arcelormittal-website
+scrapy crawl arcelormittal-jobs
+
+# Load scraped Data in OpenAI Vector Store
+cd ..
+python open_ai_vector_store_loader.py
+
+# Run streamlit app
+streamlit run app.py
+```
