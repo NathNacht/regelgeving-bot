@@ -1,3 +1,4 @@
+# Project Overview
 ```mermaid
 graph TD;
     A[Main Website] --> B[Scrapy Sitemap Spider];
@@ -10,5 +11,27 @@ graph TD;
     E --> F[Streamlit App];
     F --> G[OpenAI Assistant];
     G -.-> E;
-    G --> H[Chat!];
+    G --> H[🤖 Chat 🤖];
+```
+## Tree Structure
+```
+.
+├── app.py  # streamlit app
+├── assitant.py  # openai assistant
+├── config.py
+├── open_ai_delete_vector_stores_and_files.py  # deletes all vector stores
+├── open_ai_vector_store_loader.py  # loads all vector stores
+├── README.md
+├── requirements.txt
+└── scraper
+    ├── data
+    │   ├── website  # all website data
+    │   └── jobs  # all job data
+    ├── scraper
+    │   ├── settings.py
+    │   └── spiders
+    │       ├── arcelormittal-jobs.py  # crawls jobs
+    │       └── arcelormittal-website.py  # crawls website
+    ├── scrapy.cfg
+    └── utils.py  # scrapy utils
 ```
