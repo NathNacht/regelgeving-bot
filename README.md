@@ -1,10 +1,12 @@
 ```mermaid
 graph TD;
-    website_scraper-->data_website;
-    jobs_scraper-->data_jobs;
-    data_website-->vector_store_loader;
-    data_jobs-->vector_store_loader;
-    vector_store_loader-->OpenAi_VectorStore;
+    Website-->Scrapy_SitemapSpider;
+    Job-->Scrapy_Spider;
+    Scrapy_SitemapSpider-->Website_Folder;
+    Scrapy_Spider-->Job_Folder;
+    Website_Folder-->Vector_Store_Loader;
+    Job_Folder-->Vector_Store_Loader;
+    Vector_Store_Loader-->OpenAi_VectorStore;
     OpenAi_VectorStore-->OpenAi_Assistant;
     OpenAi_Assistant-->Streamlit;
 ```
