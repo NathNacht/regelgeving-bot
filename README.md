@@ -1,7 +1,7 @@
 ```mermaid
 graph TD;
-    Website-->Scrapy_SitemapSpider;
-    Job-->Scrapy_Spider;
+    Main_Website-->Scrapy_SitemapSpider;
+    Job_Website-->Scrapy_Spider;
     Scrapy_SitemapSpider-->Website_Folder;
     Scrapy_Spider-->Job_Folder;
     Website_Folder-->Vector_Store_Loader;
