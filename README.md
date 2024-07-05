@@ -8,7 +8,7 @@ graph TD;
     C --> D[Vector Store Loader];
     C2 --> D;
     D --> E[OpenAI VectorStore];
-    E --> F[Streamlit App];
+    F[Streamlit App];
     F --> G[OpenAI Assistant];
     G -.-> E;
     G --> H[🤖 Chat 🤖];
