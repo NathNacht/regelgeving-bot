@@ -11,7 +11,6 @@ graph TD;
     F[Streamlit App];
     F --> G[OpenAI Assistant];
     G -.-> E;
-    G --> H[🤖 Chat 🤖];
 ```
 ## Tree Structure
 ```
