@@ -1,3 +1,11 @@
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![OpenAi](https://img.shields.io/badge/OpenAI-00FF00?style=for-the-badge&logo=openai&logoColor=white)
+![Rag](https://img.shields.io/badge/Rag-FF4B4B?style=for-the-badge&logo=rag&logoColor=white)
+![neo4j](https://img.shields.io/badge/neo4j-008CC1?style=for-the-badge&logo=neo4j&logoColor=white)
+![Scrapy](https://img.shields.io/badge/Scrapy-000000?style=for-the-badge&logo=scrapy&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+
+
 # Project Overview
 ```mermaid
 graph TD;
