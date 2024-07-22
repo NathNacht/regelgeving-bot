@@ -120,8 +120,9 @@ if not st.session_state.messages:
 #         presence_penalty=0,
 #         response_format={"type": "json_object"},
 #     )
-#     response_message = response.choices[0].message.content
+#     response_message = response.choices[0].message.content.lower()
 #     print(response_message)
+#     print('engineer' in response_message)
 
     # breakpoint()
 

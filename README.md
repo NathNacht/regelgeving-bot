@@ -5,6 +5,7 @@
 ![Scrapy](https://img.shields.io/badge/Scrapy-000000?style=for-the-badge&logo=scrapy&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 
+![Image](./assets/chat-bot.png)
 
 # Project Overview
 ```mermaid
